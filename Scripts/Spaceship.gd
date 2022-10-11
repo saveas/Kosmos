@@ -38,6 +38,8 @@ func _physics_process(delta):
 		$EngineParticles.emitting=true
 
 	velocity *= 0.98
+	
+	#$Camera2D.zoom = Vector2(2,2)
 
 	if velocity.length() > MAX_SPEED:
 		velocity = velocity.normalized() * MAX_SPEED
@@ -49,7 +51,7 @@ func _physics_process(delta):
 			collision.collider.hit()
 	
 func shoot():
-	var bullets = [90,100,80]
+	var bullets = [90,100,80, 270]
 	for bulletdirection in bullets:
 		var bullet =  bulletscene.instance()	
 		bullet.start($Muzzle.global_position, rotation - deg2rad(bulletdirection))
