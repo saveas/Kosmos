@@ -18,10 +18,13 @@ func _physics_process(delta):
 			explosion.emitting=true
 			get_parent().add_child(explosion)			
 			collision.collider.queue_free()
-			self.queue_free()
+			queue_free()
 		velocity = velocity.bounce(collision.normal)
 		if collision.collider.has_method("hit"):
 			collision.collider.hit()
+			
+	var camera_pos = get_parent().get_node("Spaceship/Camera2D").get_camera_position()
+	if position.distance_to(camera_pos)>600:
+		queue_free()
 
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
+

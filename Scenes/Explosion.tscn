@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Explosion.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.0027933, 0.460894, 1 )
@@ -15,3 +17,4 @@ initial_velocity = 200.0
 scale_amount = 10.0
 scale_amount_random = 0.58
 color_ramp = SubResource( 1 )
+script = ExtResource( 1 )

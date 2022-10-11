@@ -22,12 +22,18 @@ func _physics_process(delta):
 		
 	if Input.is_action_pressed("ui_right"):
 		rotation_degrees += delta * ROTATION_SPEED
-
+		
 
 	# get acceleration if thrust is pressed
 	if Input.is_action_pressed("ui_up"):
 		var acceleration : Vector2
 		acceleration = Vector2(0, -THRUST).rotated(deg2rad(rotation_degrees))
+		velocity += acceleration
+		$EngineParticles.emitting=true
+		
+	if Input.is_action_pressed("ui_down"):
+		var acceleration : Vector2
+		acceleration = Vector2(0, +THRUST).rotated(deg2rad(rotation_degrees))
 		velocity += acceleration
 		$EngineParticles.emitting=true
 
