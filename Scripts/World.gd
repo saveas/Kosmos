@@ -11,8 +11,12 @@ func _ready():
 	timer.start()
 
 func spawn_enemy():
+	var is_valid_spawn_pos = false
 	var enemy =  Enemy.instance()	
 	var camera_pos = get_node("Spaceship/Camera2D").get_camera_position()
-	enemy.position=Vector2(rng.randi_range(camera_pos.x-300, camera_pos.x+300),rng.randi_range(camera_pos.y-300, camera_pos.y+300))
-	get_parent().add_child(enemy)
+	while not is_valid_spawn_pos:
+		enemy.position=Vector2(rng.randi_range(camera_pos.x-600, camera_pos.x+600),rng.randi_range(camera_pos.y-600, camera_pos.y+600))
+		if enemy.position.distance_to(camera_pos)>400:
+			get_parent().add_child(enemy)
+			is_valid_spawn_pos = true
 	
