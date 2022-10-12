@@ -8,13 +8,14 @@ const MAX_SPEED : float = 400.0
 const ROTATION_SPEED : float = 5.0 * 60
 
 var velocity = Vector2(0, 0)
-
+var reload_time = 0
 
 func _physics_process(delta):
 	
 	$EngineParticles.emitting=false	
-	
-	if Input.is_action_just_pressed("shoot"):
+	reload_time -= delta
+	if Input.is_action_pressed("shoot") and reload_time < 0:
+		reload_time = 0.2
 		shoot()
 	
 	if Input.is_action_pressed("ui_left"):
@@ -46,9 +47,9 @@ func _physics_process(delta):
 	
 	var collision = move_and_collide(velocity * delta)
 	if collision:
-		velocity = velocity.bounce(collision.normal)
-		if collision.collider.has_method("hit"):
-			collision.collider.hit()
+		if collision.collider.is_in_group("enemies"):	
+			velocity = velocity.bounce(collision.normal)
+
 	
 func shoot():
 	var bullets = [90,100,80, 270]
@@ -56,3 +57,4 @@ func shoot():
 		var bullet =  bulletscene.instance()	
 		bullet.start($Muzzle.global_position, rotation - deg2rad(bulletdirection))
 		get_parent().add_child(bullet)
+		

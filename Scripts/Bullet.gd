@@ -1,5 +1,6 @@
 extends KinematicBody2D
 onready var explosionscene = preload("res://Scenes/Explosion.tscn")
+onready var orbscene = preload("res://Scenes/Orb.tscn")
 
 var speed = 1000
 var velocity = Vector2()
@@ -15,10 +16,14 @@ func _physics_process(delta):
 		if collision.collider.is_in_group("enemies"):
 			var explosion =  explosionscene.instance()	
 			explosion.position=collision.collider.position
+			explosion.rotation=rotation
 			explosion.emitting=true
 			get_parent().add_child(explosion)			
 			collision.collider.queue_free()
 			queue_free()
+			var orb =  orbscene.instance()	
+			get_parent().add_child(orb)
+			orb.position=collision.collider.position
 		velocity = velocity.bounce(collision.normal)
 		if collision.collider.has_method("hit"):
 			collision.collider.hit()

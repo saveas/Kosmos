@@ -13,11 +13,19 @@ config_version=4
 config/name="SpaceShooter"
 run/main_scene="res://Scenes/World.tscn"
 
+[autoload]
+
+GlobalVariables="*res://Scripts/GlobalVariables.gd"
+
 [display]
 
 window/size/width=800
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[global]
+
+layer=false
 
 [gui]
 
@@ -36,6 +44,7 @@ shoot={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Bullet"
 2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Orb"
 
 [physics]
 
