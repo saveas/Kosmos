@@ -19,4 +19,3 @@ func spawn_enemy():
 		if enemy.position.distance_to(camera_pos)>400:
 			get_parent().add_child(enemy)
 			is_valid_spawn_pos = true
-	

@@ -9,13 +9,14 @@ const ROTATION_SPEED : float = 5.0 * 60
 
 var velocity = Vector2(0, 0)
 var reload_time = 0
+var fire_rate=0.2
 
 func _physics_process(delta):
 	
 	$EngineParticles.emitting=false	
 	reload_time -= delta
 	if Input.is_action_pressed("shoot") and reload_time < 0:
-		reload_time = 0.2
+		reload_time = fire_rate
 		shoot()
 	
 	if Input.is_action_pressed("ui_left"):
