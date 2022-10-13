@@ -13,6 +13,8 @@ func start(pos, dir):
 func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
+		if collision.collider.is_in_group("Wall"):
+			queue_free()
 		if collision.collider.is_in_group("enemies"):
 			queue_free()
 			collision.collider.reduce_health(1)

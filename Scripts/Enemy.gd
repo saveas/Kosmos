@@ -1,7 +1,7 @@
 extends KinematicBody2D
 var velocity: Vector2
 var speed = 60
-var health = 3
+var health = 1
 
 func _ready():
 	add_to_group("enemies")
