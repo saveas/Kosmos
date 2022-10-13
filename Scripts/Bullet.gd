@@ -16,6 +16,7 @@ func _physics_process(delta):
 		if collision.collider.is_in_group("enemies"):
 			queue_free()
 			collision.collider.reduce_health(1)
+			collision.collider.set_velocity(0.3*velocity*delta)
 			if collision.collider.health <= 0: 
 				var explosion =  explosionscene.instance()	
 				explosion.position=collision.collider.position
