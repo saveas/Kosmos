@@ -1,3 +1,4 @@
 extends Node
 
-var experience = 0
+var player_experience = 0
+var player_health = 100
