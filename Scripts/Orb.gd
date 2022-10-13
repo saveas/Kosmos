@@ -11,4 +11,6 @@ func _physics_process(delta):
 		velocity = (get_tree().get_nodes_in_group("SpaceShip")[0].position - position).normalized()
 		var _collision = move_and_collide(velocity * delta * speed)
 	if position.distance_to(get_tree().get_nodes_in_group("SpaceShip")[0].position)<10:
+		GlobalVariables.experience += 1
+		print(GlobalVariables.experience)
 		queue_free()
