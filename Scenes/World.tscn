@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Spaceship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=3]
@@ -114,7 +114,7 @@ shader_param/horizontal_scan_lines_opacity = 1.0
 shader_param/show_vertical_scan_lines = true
 shader_param/vertical_scan_lines_amount = 320.0
 shader_param/vertical_scan_lines_opacity = 1.0
-shader_param/boost = 1.73
+shader_param/boost = 2.0
 shader_param/aberration_amount = 0.68
 
 [sub_resource type="Curve" id=1]
@@ -380,19 +380,6 @@ shader_param/electric_power = 3.0
 [sub_resource type="ImageTexture" id=15]
 size = Vector2( 500, 500 )
 
-[sub_resource type="Environment" id=16]
-background_mode = 4
-glow_enabled = true
-glow_levels/1 = true
-glow_levels/2 = true
-glow_levels/4 = true
-glow_levels/5 = false
-glow_intensity = 0.29
-glow_strength = 1.39
-glow_blend_mode = 0
-glow_hdr_scale = 3.51
-glow_bicubic_upscale = true
-
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -426,6 +413,7 @@ custom_styles/fg = SubResource( 12 )
 script = ExtResource( 6 )
 
 [node name="ColorRect2" type="ColorRect" parent="Spaceship/Camera2D/CanvasLayer"]
+visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
 color = Color( 0.831373, 0.831373, 0.831373, 0.105882 )
@@ -495,6 +483,3 @@ material = SubResource( 14 )
 position = Vector2( 3, 0 )
 texture = SubResource( 15 )
 polygon = PoolVector2Array( -1440, -840, -1440, 1360, 2216, 1344, 2184, -840, -1440, -840, -757, -469, 1492, -469, 1493, 1015, -758, 1014, -757, -469 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 16 )

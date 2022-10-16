@@ -203,6 +203,7 @@ current = true
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="ColorRect2" type="ColorRect" parent="Camera2D/CanvasLayer"]
+visible = false
 material = SubResource( 5 )
 margin_right = 1280.0
 margin_bottom = 720.0

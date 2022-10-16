@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.0027933, 0.346369 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 0.809725, 0.809725, 1, 1, 0, 0, 1 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends CPUParticles2D
+#onready var AudioPlayer = preload(\"res://Scenes/AudioStreamPlayer2D.tscn\")
+#var audio_stream = preload(\"res://Assets/explosion.wav\")
+var timer = Timer.new()
+
+func _ready():
+	timer.connect(\"timeout\",self,\"destroy\")
+	timer.wait_time = 3
+	add_child(timer)
+	timer.start()
+
+func destroy():
+	queue_free()
+"
+
+[node name="PlayerDeath" type="CPUParticles2D"]
+emitting = false
+amount = 64
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.95
+randomness = 1.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 200.0
+scale_amount = 30.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 1 )
+script = SubResource( 3 )

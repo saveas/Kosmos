@@ -15,29 +15,30 @@ func _physics_process(delta):
 	
 	$EngineParticles.emitting=false	
 	reload_time -= delta
-	if Input.is_action_pressed("shoot") and reload_time < 0:
-		reload_time = fire_rate
-		shoot()
-	
-	if Input.is_action_pressed("move_left"):
-		rotation_degrees -= delta * ROTATION_SPEED
+	if GlobalVariables.player_is_alive:
+		if Input.is_action_pressed("shoot") and reload_time < 0:
+			reload_time = fire_rate
+			shoot()
 		
-	if Input.is_action_pressed("move_right"):
-		rotation_degrees += delta * ROTATION_SPEED
-		
+		if Input.is_action_pressed("move_left"):
+			rotation_degrees -= delta * ROTATION_SPEED
+			
+		if Input.is_action_pressed("move_right"):
+			rotation_degrees += delta * ROTATION_SPEED
+			
 
-	# get acceleration if thrust is pressed
-	if Input.is_action_pressed("move_up"):
-		var acceleration : Vector2
-		acceleration = Vector2(0, -THRUST).rotated(deg2rad(rotation_degrees))
-		velocity += acceleration
-		$EngineParticles.emitting=true
-		
-	if Input.is_action_pressed("move_down"):
-		var acceleration : Vector2
-		acceleration = Vector2(0, +THRUST).rotated(deg2rad(rotation_degrees))
-		velocity += acceleration
-		$EngineParticles.emitting=true
+		# get acceleration if thrust is pressed
+		if Input.is_action_pressed("move_up"):
+			var acceleration : Vector2
+			acceleration = Vector2(0, -THRUST).rotated(deg2rad(rotation_degrees))
+			velocity += acceleration
+			$EngineParticles.emitting=true
+			
+		if Input.is_action_pressed("move_down"):
+			var acceleration : Vector2
+			acceleration = Vector2(0, +THRUST).rotated(deg2rad(rotation_degrees))
+			velocity += acceleration
+			$EngineParticles.emitting=true
 
 	velocity *= 0.98
 	
@@ -48,9 +49,9 @@ func _physics_process(delta):
 	
 	var collision = move_and_collide(velocity * delta)
 	if collision:
+		if collision.collider.is_in_group("enemies"):
+			pass
 		velocity = velocity.bounce(collision.normal)
-		if collision.collider.is_in_group("enemies"):	
-			GlobalVariables.player_health -= 1
 
 	
 func shoot():
