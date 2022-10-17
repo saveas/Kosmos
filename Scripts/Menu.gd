@@ -3,7 +3,7 @@ extends Node2D
 
 # Declare member variables here. Examples:
 func _input(event):
-	if (event is InputEventKey or event is InputEventScreenTouch) and event.pressed:
+	if (event is InputEventKey or event is InputEventScreenTouch or event is InputEventMouseButton) and event.pressed:
 		var _start = get_tree().change_scene("res://Scenes/World.tscn")
 
 func _process(_delta):

@@ -13,30 +13,47 @@ var fire_rate=0.2
 
 func _physics_process(delta):
 	
+	var closest_distance = 10000
+	var enemy_near = false
+	for body in $Area2D.get_overlapping_bodies():
+		if position.distance_to(body.position)<closest_distance:
+			look_at(body.position)
+			closest_distance = position.distance_to(body.position)
+			enemy_near = true
+	
 	$EngineParticles.emitting=false	
 	reload_time -= delta
 	if GlobalVariables.player_is_alive:
-		if Input.is_action_pressed("shoot") and reload_time < 0:
+		
+		if reload_time < 0:
 			reload_time = fire_rate
-			shoot()
+			if enemy_near:
+				shoot()
+		
 		
 		if Input.is_action_pressed("move_left"):
-			rotation_degrees -= delta * ROTATION_SPEED
+			var acceleration : Vector2
+			acceleration = Vector2(-THRUST, 0)
+			velocity += acceleration
+			$EngineParticles.emitting=true
 			
 		if Input.is_action_pressed("move_right"):
-			rotation_degrees += delta * ROTATION_SPEED
+			var acceleration : Vector2
+			acceleration = Vector2(THRUST, 0)
+			velocity += acceleration
+			$EngineParticles.emitting=true
 			
 
 		# get acceleration if thrust is pressed
 		if Input.is_action_pressed("move_up"):
 			var acceleration : Vector2
-			acceleration = Vector2(0, -THRUST).rotated(deg2rad(rotation_degrees))
+			acceleration = Vector2(0, -THRUST)
 			velocity += acceleration
 			$EngineParticles.emitting=true
 			
 		if Input.is_action_pressed("move_down"):
 			var acceleration : Vector2
-			acceleration = Vector2(0, +THRUST).rotated(deg2rad(rotation_degrees))
+			acceleration = Vector2(0, +THRUST)
 			velocity += acceleration
 			$EngineParticles.emitting=true
 
@@ -55,7 +72,7 @@ func _physics_process(delta):
 
 	
 func shoot():
-	var bullets = [90,100,80, 270]
+	var bullets = [0,10,-10, 180]
 	for bulletdirection in bullets:
 		var bullet =  bulletscene.instance()	
 		bullet.start($Muzzle.global_position, rotation - deg2rad(bulletdirection))

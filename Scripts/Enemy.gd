@@ -1,7 +1,7 @@
 extends KinematicBody2D
 var velocity: Vector2
 var speed = 60
-var health = 1
+var health = 5
 var state = "idle"
 
 func _ready():
