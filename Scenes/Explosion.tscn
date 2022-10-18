@@ -6,14 +6,17 @@
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.0027933, 0.346369 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 0.809725, 0.809725, 1, 1, 0, 0, 1 )
+offsets = PoolRealArray( 0, 0.0027933, 0.659218, 0.879888 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 0.544716, 0.544716, 1, 1, 0, 0, 1 )
 
 [node name="Explosion" type="CPUParticles2D"]
+modulate = Color( 3, 1, 1, 1 )
 emitting = false
 amount = 32
+lifetime = 2.0
 one_shot = true
-explosiveness = 0.8
+speed_scale = 1.59
+explosiveness = 0.9
 randomness = 1.0
 spread = 120.0
 gravity = Vector2( 0, 0 )

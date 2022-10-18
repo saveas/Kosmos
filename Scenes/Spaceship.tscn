@@ -20,7 +20,7 @@ collision_mask = 20
 script = ExtResource( 2 )
 
 [node name="EngineParticles" type="CPUParticles2D" parent="."]
-modulate = Color( 10, 10, 10, 1 )
+modulate = Color( 1.64, 1.65, 0, 1 )
 position = Vector2( -9, 0 )
 amount = 64
 local_coords = false

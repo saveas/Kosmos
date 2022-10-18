@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Spaceship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=3]
@@ -380,6 +380,13 @@ shader_param/electric_power = 3.0
 [sub_resource type="ImageTexture" id=15]
 size = Vector2( 500, 500 )
 
+[sub_resource type="Environment" id=16]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 0.88
+glow_strength = 0.86
+glow_hdr_threshold = 1.5
+
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -483,3 +490,6 @@ material = SubResource( 14 )
 position = Vector2( 3, 0 )
 texture = SubResource( 15 )
 polygon = PoolVector2Array( -1440, -840, -1440, 1360, 2216, 1344, 2184, -840, -1440, -840, -757, -469, 1492, -469, 1493, 1015, -758, 1014, -757, -469 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 16 )
