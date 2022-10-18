@@ -10,14 +10,17 @@ const ROTATION_SPEED : float = 5.0 * 60
 var velocity = Vector2(0, 0)
 var reload_time = 0
 var fire_rate=0.2
+var shoot_rotation = 0
 
 func _physics_process(delta):
-	
+		
 	var closest_distance = 10000
 	var enemy_near = false
 	for body in $Area2D.get_overlapping_bodies():
 		if position.distance_to(body.position)<closest_distance:
-			look_at(body.position)
+			#look_at(body.position)
+			$Gun.global_rotation = PI+position.angle_to_point(body.position)
+			shoot_rotation = $Gun.global_rotation
 			closest_distance = position.distance_to(body.position)
 			enemy_near = true
 	
@@ -59,22 +62,23 @@ func _physics_process(delta):
 
 	velocity *= 0.98
 	
-	#$Camera2D.zoom = Vector2(2,2)
+
 
 	if velocity.length() > MAX_SPEED:
 		velocity = velocity.normalized() * MAX_SPEED
 	
 	var collision = move_and_collide(velocity * delta)
 	if collision:
-		if collision.collider.is_in_group("enemies"):
+		if not collision.collider.is_in_group("enemies"):
 			pass
 		velocity = velocity.bounce(collision.normal)
-
 	
+	#rotation = cos(velocity.normalized().x) + sin(velocity.normalized().y)
+	look_at(transform.origin + velocity)
 func shoot():
 	var bullets = [0,10,-10, 180]
 	for bulletdirection in bullets:
 		var bullet =  bulletscene.instance()	
-		bullet.start($Muzzle.global_position, rotation - deg2rad(bulletdirection))
+		bullet.start($Gun/Muzzle.global_position, shoot_rotation - deg2rad(bulletdirection))
 		get_parent().add_child(bullet)
 		

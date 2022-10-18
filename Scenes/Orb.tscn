@@ -1,40 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Orb.gd" type="Script" id=1]
 [ext_resource path="res://Assets/orb.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
-
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-
-
-uniform vec4 color: hint_color = vec4(1.0);
-
-
-float circle(vec2 position, float radius, float feather)
-{
-	return smoothstep(radius, radius + feather, length(position - vec2(0.5)));
-}
-
-
-void fragment(){
-	
-	float outer = circle(vec2(UV.x, UV.y), 0.35, 0.01);
-	
-	float fade_effect = sin(TIME) * 0.1;
-	
-	float inner = 1.0 - circle(vec2(UV.x, UV.y), 0.275, 0.1 - fade_effect );
-	
-	COLOR = color;
-	COLOR.a -= outer + inner;
-	
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-shader_param/color = Color( 0.0784314, 0.796078, 0.0901961, 1 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 collision_layer = 8
@@ -45,7 +15,5 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 22.62, 17.55, 22.36, 1 )
-material = SubResource( 3 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )

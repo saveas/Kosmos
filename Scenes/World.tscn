@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Spaceship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=3]
@@ -108,10 +108,10 @@ shader_param/curvature_y_amount = 4.0
 shader_param/corner_color = Color( 0, 0, 0, 1 )
 shader_param/show_vignette = true
 shader_param/vignette_opacity = 0.3
-shader_param/show_horizontal_scan_lines = true
+shader_param/show_horizontal_scan_lines = false
 shader_param/horizontal_scan_lines_amount = 180.0
 shader_param/horizontal_scan_lines_opacity = 1.0
-shader_param/show_vertical_scan_lines = true
+shader_param/show_vertical_scan_lines = false
 shader_param/vertical_scan_lines_amount = 320.0
 shader_param/vertical_scan_lines_opacity = 1.0
 shader_param/boost = 2.0
@@ -380,10 +380,6 @@ shader_param/electric_power = 3.0
 [sub_resource type="ImageTexture" id=15]
 size = Vector2( 500, 500 )
 
-[sub_resource type="Environment" id=16]
-glow_enabled = true
-glow_intensity = 2.25
-
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -487,6 +483,3 @@ material = SubResource( 14 )
 position = Vector2( 3, 0 )
 texture = SubResource( 15 )
 polygon = PoolVector2Array( -1440, -840, -1440, 1360, 2216, 1344, 2184, -840, -1440, -840, -757, -469, 1492, -469, 1493, 1015, -758, 1014, -757, -469 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 16 )

@@ -7,4 +7,4 @@ func _input(event):
 		var _start = get_tree().change_scene("res://Scenes/World.tscn")
 
 func _process(_delta):
-	$Camera2D.position.x += 1
+	$Camera2D.position.x += 0.2

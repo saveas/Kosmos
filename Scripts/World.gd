@@ -5,9 +5,7 @@ var timer = Timer.new()
 var rng = RandomNumberGenerator.new()
 
 func _ready():
-	
-	
-	
+
 	timer.connect("timeout",self,"spawn_enemy")
 	timer.wait_time = 0.4
 	add_child(timer)
